@@ -1,3 +1,4 @@
+/* General styles */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -10,20 +11,20 @@ body {
   min-height: 100vh;
 }
 
+/* Background gradient animation */
 @keyframes gradientAnimation {
   0% {
     background-position: 0% 50%;
   }
-
   50% {
     background-position: 100% 50%;
   }
-
   100% {
     background-position: 0% 50%;
   }
 }
 
+/* Title */
 h1 {
   margin-bottom: 20px;
   color: #fff;
@@ -31,6 +32,7 @@ h1 {
   font-size: 40px;
 }
 
+/* Slider container */
 .slider-container {
   position: relative;
   width: 90%;
@@ -41,18 +43,19 @@ h1 {
   background: rgba(0, 0, 0, 0.1);
 }
 
+/* Slides container */
 .slides {
   display: flex;
-  transition: transform 0.5s ease-in-out;
-  margin: 20px;
+  transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth animation */
+  will-change: transform; /* Optimize performance */
 }
 
+/* Individual slide */
 .slide {
   flex: 0 0 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .slide img {
@@ -63,6 +66,7 @@ h1 {
   margin-bottom: 20px;
 }
 
+/* Navigation buttons */
 .navigation {
   position: absolute;
   top: 50%;
@@ -86,6 +90,7 @@ h1 {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+/* Pagination dots */
 .pagination {
   position: absolute;
   bottom: 10px;
@@ -111,6 +116,7 @@ h1 {
   background-color: rgba(242, 236, 236, 0.8);
 }
 
+/* Responsive styles */
 @media (max-width: 768px) {
   h1 {
     font-size: 30px;

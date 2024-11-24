@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Image Slider</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <div class="slider-section">
-        <div class="slides">
-            <img src="./images/1.jpg" alt="img1" class="slide">
-            <img src="./images/2.jpg" alt="img2" class="slide">
-            <img src="./images/3.jpg" alt="img3" class="slide">
-            <img src="./images/4.jpg" alt="img4" class="slide">
-            <img src="./images/5.jpg" alt="img5" class="slide">
-            <img src="./images/6.jpg" alt="img6" class="slide">
-            <img src="./images/7.jpg" alt="img7" class="slide">
-            <img src="./images/8.jpg" alt="img8" class="slide">
-        </div>
-        <button class="prev">❮</button>
-        <button class="next">❯</button>
-        <div class="pagination"></div>
+  <h1>Image Gallery</h1>
+  <div class="slider-container">
+    <div class="slides">
+      <div class="slide"><img src="./images/1.jpg" alt="Image 1"></div>
+      <div class="slide"><img src="./images/2.jpg" alt="Image 2"></div>
+      <div class="slide"><img src="./images/4.jpg" alt="Image 4"></div>
+      <div class="slide"><img src="./images/5.jpg" alt="Image 5"></div>
+      <div class="slide"><img src="./images/6.jpg" alt="Image 6"></div>
+      <div class="slide"><img src="./images/8.jpg" alt="Image 8"></div>
     </div>
-    <script src="./script.js"></script>
+    <div class="navigation">
+      <button id="prev">&#10094;</button>
+      <button id="next">&#10095;</button>
+    </div>
+    <div class="pagination"></div>
+  </div>
+  <script src="./script.js"></script>
 </body>
+
 </html>

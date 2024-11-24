@@ -1,68 +1,69 @@
-const sliderSection = document.querySelector(".slider-section");
 const slides = document.querySelector(".slides");
-const slide = document.querySelectorAll(".slide");
-const prevButton = document.querySelector(".prev");
-const nextButton = document.querySelector(".next");
+const slideElements = document.querySelectorAll(".slide");
+const prevButton = document.getElementById("prev");
+const nextButton = document.getElementById("next");
 const pagination = document.querySelector(".pagination");
 
 let currentIndex = 0;
-let interval;
+const totalSlides = slideElements.length;
+const intervalTime = 3000;
+let slideInterval;
 
-slide.forEach((_, index) => {
-  const dot = document.createElement("div");
-  dot.classList.add("dot");
-  if (index === 0) dot.classList.add("active");
-  dot.addEventListener("click", () => goToSlide(index));
+for (let i = 0; i < totalSlides; i++) {
+  const dot = document.createElement("span");
+  if (i === 0) dot.classList.add("active");
   pagination.appendChild(dot);
-});
+}
 
-const goToSlide = (index) => {
-  currentIndex = index;
-  slides.style.transform = `translateX(-${index * (100 / slide.length) }%)`;
-  updateDots();
-};
+const dots = document.querySelectorAll(".pagination span");
 
-const updateDots = () => {
-  const dots = document.querySelectorAll(".dot");
-  dots.forEach((dot) => dot.classList.remove("active"));
+function updateSlider() {
+  slides.style.transition = "transform 0.5s ease-in-out";
+  slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+  dots.forEach(dot => dot.classList.remove("active"));
   dots[currentIndex].classList.add("active");
-};
+}
 
-const nextSlide = () => {
-  currentIndex = (currentIndex + 1) % slide.length;
-  goToSlide(currentIndex);
-};
+function nextSlide() {
+  currentIndex = (currentIndex + 1) % totalSlides;
+  updateSlider();
+}
 
-const prevSlide = () => {
-  currentIndex = (currentIndex - 1 + slide.length) % slide.length;
-  goToSlide(currentIndex);
-};
+function prevSlide() {
+  currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+  updateSlider();
+}
 
-const startAutoSlide = () => {
-  interval = setInterval(nextSlide, 3000);
-};
+function pauseSlider() {
+  clearInterval(slideInterval);
+}
 
-const stopAutoSlide = () => {
-  clearInterval(interval);
-};
+function startSlider() {
+  slideInterval = setInterval(nextSlide, intervalTime);
+}
 
-nextButton.addEventListener("click", nextSlide);
-prevButton.addEventListener("click", prevSlide);
-
-sliderSection.addEventListener("mouseenter", stopAutoSlide);
-sliderSection.addEventListener("mouseleave", startAutoSlide);
-
-let startX = 0;
-let endX = 0;
-
-sliderSection.addEventListener("touchstart", (e) => {
-  startX = e.touches[0].clientX;
+nextButton.addEventListener("click", () => {
+  pauseSlider();
+  nextSlide();
+  startSlider();
 });
 
-sliderSection.addEventListener("touchend", (e) => {
-  endX = e.changedTouches[0].clientX;
-  if (startX - endX > 50) nextSlide();
-  if (endX - startX > 50) prevSlide();
+prevButton.addEventListener("click", () => {
+  pauseSlider();
+  prevSlide();
+  startSlider();
 });
 
-startAutoSlide();
+pagination.addEventListener("click", e => {
+  if (e.target.tagName === "SPAN") {
+    pauseSlider();
+    currentIndex = Array.from(dots).indexOf(e.target);
+    updateSlider();
+    startSlider();
+  }
+});
+
+slides.addEventListener("mouseenter", pauseSlider);
+slides.addEventListener("mouseleave", startSlider);
+
+startSlider();

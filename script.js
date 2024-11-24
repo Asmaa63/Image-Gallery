@@ -66,4 +66,30 @@ pagination.addEventListener("click", e => {
 slides.addEventListener("mouseenter", pauseSlider);
 slides.addEventListener("mouseleave", startSlider);
 
+let startX = 0;
+let endX = 0;
+
+slides.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
+});
+
+slides.addEventListener("touchend", (e) => {
+  endX = e.changedTouches[0].clientX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  const swipeThreshold = 50;
+  if (startX - endX > swipeThreshold) {
+    pauseSlider();
+    nextSlide();
+    startSlider();
+  } else if (endX - startX > swipeThreshold) {
+    pauseSlider();
+    prevSlide();
+    startSlider();
+  }
+}
+
+
 startSlider();
